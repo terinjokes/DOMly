@@ -561,9 +561,11 @@ Compiler.prototype.buildFunctionBody = function(root, parentName) {
         if (children.length === 1 && children[0].type === 'text') {
           text = $(el).text();
 
-          if (!(this.options.stripWhitespace && isBlank(text)) || text.length) {
-            // Set text content directly if there are no other children
-            this.setTextContent(elName, text);
+          if (text.length) {
+            if (!this.options.stripWhitespace && isBlank(text)) {
+              // Set text content directly if there are no other children
+              this.setTextContent(elName, text);
+            }
           }
         }
         else if (children.length) {
